@@ -3,8 +3,15 @@ using UnityEngine;
 public class Player : MonoBehaviour {
     public GameObject bulletPrefab; // 弾のプレハブ
     public float bulletSpeed = 10f;
-    public float lifetime = 3f; 
+    public float lifetime = 3f;
 
+    public int maxHP = 3;
+    private int currentHP;
+    public GameManager gameManager;
+
+    void Start() {
+        currentHP = maxHP;
+    }
     void Update() {
         if (Input.GetMouseButtonDown(0)) {
             // マウス位置をワールド座標に変換
@@ -22,6 +29,20 @@ public class Player : MonoBehaviour {
                 rb.linearVelocity = dir * bulletSpeed;
                 Destroy(bullet,lifetime); // lifetime後に弾を破棄
             }
+        }
+    }
+
+    void OnTriggerEnter2D(Collider2D other) {
+        if (other.CompareTag("Enemy")) {
+            TakeDamage(1); // 弾に当たったらダメージを受ける
+        }
+    }
+
+    public void TakeDamage(int damage) {
+        currentHP -= damage;
+        if (currentHP <= 0) {
+            gameManager.GameOver();
+            Destroy(gameObject);
         }
     }
 }

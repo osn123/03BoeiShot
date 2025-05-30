@@ -1,10 +1,20 @@
-﻿using UnityEngine;
+﻿using DG.Tweening.Core.Easing;
+using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
     public Transform target;
     public float speed = 2f;
 
+    public int maxHP = 3;
+    private int currentHP;
+    public int scoreValue = 100;
+    public GameManager gameManager;
+
+    void Start() {
+        currentHP = maxHP;
+        gameManager=gameObject.GetComponent<GameManager>();
+    }
     void Update()
     {
         if (target != null)
@@ -19,7 +29,18 @@ public class Enemy : MonoBehaviour
     {
         if (other.CompareTag("PlayerBullet"))
         {
-            Destroy(gameObject); // 弾に当たったら消える
+            TakeDamage(1); // 弾に当たったらダメージを受ける
+            //Destroy(gameObject); // 弾に当たったら消える
+        }
+        if (other.CompareTag("Player") ) {
+            Destroy(gameObject);
+        }
+    }
+    void TakeDamage(int damage) {
+        currentHP -= damage;
+        if (currentHP <= 0) {
+            //gameManager.AddScore(scoreValue);
+            Destroy(gameObject);
         }
     }
 }
