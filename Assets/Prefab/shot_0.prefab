@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 461926648237983817}
   - component: {fileID: 4864930439556623222}
   - component: {fileID: -4332131855735508093}
+  - component: {fileID: 2364363203485878444}
   m_Layer: 0
   m_Name: shot_0
   m_TagString: PlayerBullet
@@ -153,3 +154,16 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0}
   m_Size: {x: 0.56, y: 0.56}
   m_Direction: 0
+--- !u!114 &2364363203485878444
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7057691337436663669}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f293d83581d8464385a0139331de1a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 1

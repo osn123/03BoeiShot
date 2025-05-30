@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour {
     public GameObject bulletPrefab; // 弾のプレハブ
@@ -8,9 +9,14 @@ public class Player : MonoBehaviour {
     public int maxHP = 3;
     private int currentHP;
     public GameManager gameManager;
+    public Image barImage; // HPバー本体のImage
+
+    public AudioClip damageSE;
+    private AudioSource audioSource;
 
     void Start() {
         currentHP = maxHP;
+        audioSource = GetComponent<AudioSource>();
     }
     void Update() {
         if (Input.GetMouseButtonDown(0)) {
@@ -32,14 +38,15 @@ public class Player : MonoBehaviour {
         }
     }
 
-    void OnTriggerEnter2D(Collider2D other) {
-        if (other.CompareTag("Enemy")) {
-            TakeDamage(1); // 弾に当たったらダメージを受ける
-        }
-    }
-
     public void TakeDamage(int damage) {
         currentHP -= damage;
+        audioSource.PlayOneShot(damageSE);
+
+        float ratio = Mathf.Clamp01((float)currentHP / maxHP);
+        //Debug.Log("ratio: " + ratio,gameObject);
+        barImage.rectTransform.sizeDelta = new Vector2(ratio * barImage.rectTransform.sizeDelta.x,barImage.rectTransform.sizeDelta.y); // 
+        //Debug.Log("barImage.rectTransform.sizeDelta.x: " + barImage.rectTransform.sizeDelta.x,gameObject);
+
         if (currentHP <= 0) {
             gameManager.GameOver();
             Destroy(gameObject);

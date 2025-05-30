@@ -1,8 +1,10 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using static UnityEngine.Rendering.DebugUI;
 
 public class GameManager : MonoBehaviour {
+    public static GameManager Instance; // シングルトン
     public TextMeshProUGUI scoreText;
     public TextMeshProUGUI timeText;
 
@@ -17,6 +19,12 @@ public class GameManager : MonoBehaviour {
     public Player player;
     public Enemy enemy;
 
+    void Awake() {
+        if (Instance == null)
+            Instance = this;
+        else
+            Destroy(gameObject);
+    }
 
     void Start() {
         score = 0;
@@ -44,7 +52,9 @@ public class GameManager : MonoBehaviour {
     }
 
     void UpdateScoreText() {
-        scoreText.text = score.ToString("N0"); // カンマ区切り
+        if (scoreText != null) {
+            scoreText.text = score.ToString(); // スコア: を追加
+        }
     }
 
     void UpdateTimeText() {
@@ -59,6 +69,5 @@ public class GameManager : MonoBehaviour {
         gameClearPanel.SetActive(true);
         Time.timeScale = 0f;
     }
-
 
 }

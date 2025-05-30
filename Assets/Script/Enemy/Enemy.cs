@@ -1,5 +1,7 @@
 ﻿using DG.Tweening.Core.Easing;
 using UnityEngine;
+using UnityEngine.Audio;
+using UnityEngine.UI;
 
 public class Enemy : MonoBehaviour
 {
@@ -11,9 +13,12 @@ public class Enemy : MonoBehaviour
     public int scoreValue = 100;
     public GameManager gameManager;
 
+    public Image barImage; // HPバー本体のImage
+    public AudioClip damageSE;
+    private AudioSource audioSource;
+
     void Start() {
         currentHP = maxHP;
-        gameManager=gameObject.GetComponent<GameManager>();
     }
     void Update()
     {
@@ -27,19 +32,22 @@ public class Enemy : MonoBehaviour
     // 4. 敵の当たり判定設定
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("PlayerBullet"))
-        {
-            TakeDamage(1); // 弾に当たったらダメージを受ける
-            //Destroy(gameObject); // 弾に当たったら消える
-        }
         if (other.CompareTag("Player") ) {
-            Destroy(gameObject);
+            var player = other.GetComponent<Player>();
+            if (player != null) {
+                player.TakeDamage(1);
+                Destroy(gameObject);
+            }            
         }
     }
-    void TakeDamage(int damage) {
+    public void TakeDamage(int damage) {
         currentHP -= damage;
+       // audioSource.PlayOneShot(damageSE);
+        float ratio = Mathf.Clamp01((float)currentHP / maxHP);
+        barImage.rectTransform.sizeDelta = new Vector2(ratio * barImage.rectTransform.sizeDelta.x,barImage.rectTransform.sizeDelta.y); // 
+
         if (currentHP <= 0) {
-            //gameManager.AddScore(scoreValue);
+            GameManager.Instance.AddScore(scoreValue);
             Destroy(gameObject);
         }
     }
