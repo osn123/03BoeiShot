@@ -70,4 +70,6 @@ public class GameManager : MonoBehaviour {
         Time.timeScale = 0f;
     }
 
+    // TODO: キー入力でゲーム開始
+
 }
