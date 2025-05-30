@@ -4,10 +4,16 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement; // DOTweenの名前空間を追加
 
-public class TitleManager : MonoBehaviour {
+public class TitleManager : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler {
     public RectTransform titleLogo;
-    public Button startBtn; // Button型でアサイン
-    public RectTransform startBtnRect; // RectTransform型でアサイン
+    public Button startBtn;
+    public RectTransform startBtnRect;
+
+    public AudioSource bgmSource;      // BGM用AudioSource
+    public AudioSource seSource;       // 効果音用AudioSource
+    public AudioClip bgmClip;          // BGMクリップ
+    public AudioClip clickSeClip;      // クリック効果音クリップ
+    public AudioClip hoverSeClip;      // ホバー効果音クリップ
 
     void Start() {
         // titleLogoアニメーション
@@ -18,15 +24,12 @@ public class TitleManager : MonoBehaviour {
         // startBtnイベント登録
         startBtn.onClick.AddListener(OnStartBtnClick);
 
-        // ホバーイベント登録
-        EventTrigger trigger = startBtn.gameObject.AddComponent<EventTrigger>();
-        var entryEnter = new EventTrigger.Entry { eventID = EventTriggerType.PointerEnter };
-        entryEnter.callback.AddListener((_) => OnStartBtnHover(true));
-        trigger.triggers.Add(entryEnter);
-
-        var entryExit = new EventTrigger.Entry { eventID = EventTriggerType.PointerExit };
-        entryExit.callback.AddListener((_) => OnStartBtnHover(false));
-        trigger.triggers.Add(entryExit);
+        // BGM再生
+        if (bgmSource != null && bgmClip != null) {
+            bgmSource.clip = bgmClip;
+            bgmSource.loop = true;
+            bgmSource.Play();
+        }
     }
 
     void OnStartBtnClick() {
@@ -34,14 +37,21 @@ public class TitleManager : MonoBehaviour {
         startBtnRect.DOPunchScale(Vector3.one * 0.2f,0.2f,10,1).OnComplete(() => {
             SceneManager.LoadScene("GameScene");
         });
+        // クリック効果音
+        if (seSource != null && clickSeClip != null) {
+            seSource.PlayOneShot(clickSeClip);
+        }
     }
 
-    void OnStartBtnHover(bool isEnter) {
-        // ホバーアニメーション
-        if (isEnter) {
-            startBtnRect.DOScale(1.1f,0.2f).SetEase(Ease.OutBack);
-        } else {
-            startBtnRect.DOScale(1.0f,0.2f).SetEase(Ease.OutBack);
+    public void OnPointerEnter(PointerEventData eventData) {
+        startBtnRect.DOScale(1.1f,0.2f).SetEase(Ease.OutBack);
+        // ホバー効果音
+        if (seSource != null && hoverSeClip != null) {
+            seSource.PlayOneShot(hoverSeClip);
         }
+    }
+
+    public void OnPointerExit(PointerEventData eventData) {
+        startBtnRect.DOScale(1.0f,0.2f).SetEase(Ease.OutBack);
     }
 }
