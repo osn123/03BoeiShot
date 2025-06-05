@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour {
     public TextMeshProUGUI scoreText;
     public TextMeshProUGUI timeText;
 
+    public GameObject gameStartPanel;
     public GameObject gameOverPanel;
     public GameObject gameClearPanel;
 
@@ -18,6 +19,7 @@ public class GameManager : MonoBehaviour {
 
     public Player player;
     public Enemy enemy;
+    bool startflg=false;
 
     void Awake() {
         if (Instance == null)
@@ -30,11 +32,18 @@ public class GameManager : MonoBehaviour {
         score = 0;
         UpdateScoreText();
         UpdateTimeText();
+
+       // gameStartPanel.SetActive(false);
         gameOverPanel.SetActive(false);
         gameClearPanel.SetActive(false);
     }
 
     void Update() {
+        //if (Input.GetMouseButtonUp(0)&& startflg)
+        //{
+        //    gameStartPanel.SetActive(false);
+        //    startflg = true;
+        //}
         if (timeLeft > 0f) {
             timeLeft -= Time.deltaTime;
             if (timeLeft < 0f)

@@ -2,7 +2,8 @@
 
 public class PlayerBullet : MonoBehaviour
 {
-    public int damage = 1;
+    //public int damage = 1;
+    public float damage ;
 
     void OnTriggerEnter2D(Collider2D other)
     {
@@ -12,6 +13,8 @@ public class PlayerBullet : MonoBehaviour
             if (enemy != null)
             {
                 enemy.TakeDamage(damage);
+                //Rigidbody2D rb = this.GetComponent<Rigidbody2D>();
+                //enemy.TakeDamage((int)rb.linearVelocity.magnitude);
             }
             Destroy(gameObject);
         }

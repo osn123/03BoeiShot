@@ -8,8 +8,8 @@ public class Enemy : MonoBehaviour
     public Transform target;
     public float speed = 2f;
 
-    public int maxHP = 3;
-    private int currentHP;
+    public float maxHP = 3;
+    private float currentHP;
     public int scoreValue = 100;
     public GameManager gameManager;
 
@@ -40,7 +40,7 @@ public class Enemy : MonoBehaviour
             }            
         }
     }
-    public void TakeDamage(int damage) {
+    public void TakeDamage(float damage) {
         currentHP -= damage;
        // audioSource.PlayOneShot(damageSE);
         float ratio = Mathf.Clamp01((float)currentHP / maxHP);

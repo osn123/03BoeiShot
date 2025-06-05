@@ -6,7 +6,8 @@ public class EnemySpawner : MonoBehaviour {
     public Transform target;
 
     void Start() {
-        InvokeRepeating(nameof(SpawnEnemy),1f,spawnInterval);
+        //InvokeRepeating(nameof(SpawnEnemy),1f,spawnInterval);
+        InvokeRepeating("SpawnEnemy",1f,spawnInterval);
     }
 
     void SpawnEnemy() {
@@ -21,17 +22,17 @@ public class EnemySpawner : MonoBehaviour {
         float camWidth = camHeight * cam.aspect;
 
         // âÊñ ÇÃè„â∫ç∂âEÇ«Ç±Ç©ÇÁèoÇ∑Ç©ÇÉâÉìÉ_ÉÄÇ≈åàíË
-        int side = Random.Range(0, 4);
+        int side = Random.Range(1, 4);
         Vector2 pos = Vector2.zero;
         switch (side) {
-            case 0: // è„
+            case 1: // è„
                 pos.x = Random.Range(-camWidth / 2,camWidth / 2);
                 pos.y = camHeight / 2 + 1f;
                 break;
-            case 1: // â∫
-                pos.x = Random.Range(-camWidth / 2,camWidth / 2);
-                pos.y = -camHeight / 2 - 1f;
-                break;
+            //case 1: // â∫
+            //    pos.x = Random.Range(-camWidth / 2,camWidth / 2);
+            //    pos.y = -camHeight / 2 - 1f;
+            //    break;
             case 2: // ç∂
                 pos.x = -camWidth / 2 - 1f;
                 pos.y = Random.Range(-camHeight / 2,camHeight / 2);

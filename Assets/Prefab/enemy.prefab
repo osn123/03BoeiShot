@@ -282,9 +282,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
-  speed: 2
+  speed: 1
   maxHP: 3
-  scoreValue: 100
+  scoreValue: 200
   gameManager: {fileID: 0}
   barImage: {fileID: 4943773310327303166}
   damageSE: {fileID: 8300000, guid: 10ffec4053b625140985f9ee54f97f63, type: 3}
