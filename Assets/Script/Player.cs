@@ -59,8 +59,6 @@ public class Player : MonoBehaviour {
             // 発射方向を計算
             Vector2 dir = (worldPos - transform.position).normalized;
 
-
-
             // 弾を生成して発射
             GameObject bullet = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
             Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
@@ -74,10 +72,7 @@ public class Player : MonoBehaviour {
             {
                 bulletScript.damage = holdTime*2;
             }
-
             isHolding = false;
-            //float ratio = Mathf.Clamp01(holdTime / maxHoldTime);
-            //atkbarImage.rectTransform.sizeDelta = new Vector2(ratio * barImage.rectTransform.sizeDelta.x, barImage.rectTransform.sizeDelta.y); // 
         }
     }
 
