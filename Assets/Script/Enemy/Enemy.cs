@@ -49,6 +49,7 @@ public class Enemy : MonoBehaviour
         if (currentHP <= 0) {
             GameManager.Instance.AddScore(scoreValue);
             Destroy(gameObject);
+            //TODO : エフェクト
         }
     }
 }
