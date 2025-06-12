@@ -17,8 +17,11 @@ public class Enemy : MonoBehaviour
     public AudioClip damageSE;
     private AudioSource audioSource;
 
+    private Animator animator;
+
     void Start() {
         currentHP = maxHP;
+        animator = GetComponent<Animator>();
     }
     void Update()
     {
@@ -33,10 +36,11 @@ public class Enemy : MonoBehaviour
     void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player") ) {
+            animator.SetBool("Atk", true); // アニメーションをAttackに切り替え
             var player = other.GetComponent<Player>();
             if (player != null) {
                 player.TakeDamage(1);
-                Destroy(gameObject);
+                Destroy(gameObject,1);
             }            
         }
     }

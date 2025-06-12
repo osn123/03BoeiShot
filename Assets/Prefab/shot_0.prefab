@@ -167,3 +167,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 1
+  effect: {fileID: 8367256598104179562, guid: 1dedafa0f0f84a14d93cad259fbc5cd5, type: 3}
