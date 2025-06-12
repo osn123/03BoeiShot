@@ -4,6 +4,7 @@ public class EnemySpawner : MonoBehaviour {
     public GameObject enemyPrefab;
     public float spawnInterval = 2f;
     public Transform target;
+    public static float order=0.0f;
 
     void Start() {
         //InvokeRepeating(nameof(SpawnEnemy),1f,spawnInterval);
