@@ -32,10 +32,16 @@ public class Player : MonoBehaviour {
             float holdTime = Time.time - mouseDownTime;
             float ratio = Mathf.Clamp01(holdTime / maxHoldTime);
             atkbarImage.rectTransform.sizeDelta = new Vector2(ratio * barImage.rectTransform.sizeDelta.x, barImage.rectTransform.sizeDelta.y); // 
+            if (ratio >=0.66f)
+            {
+                atkbarImage.color = Color.red; //
+            }
+        
         }
         else
         {
-            atkbarImage.rectTransform.sizeDelta = new Vector2(0, barImage.rectTransform.sizeDelta.y); // 
+            atkbarImage.rectTransform.sizeDelta = new Vector2(0, barImage.rectTransform.sizeDelta.y); //
+            atkbarImage.color = Color.black;                                                                                         //
         }
 
         // マウスボタンを押した瞬間の時刻を記録
@@ -67,10 +73,10 @@ public class Player : MonoBehaviour {
                 Destroy(bullet,lifetime); // lifetime後に弾を破棄
             }
             // ダメージ値をセット
-            PlayerBullet bulletScript = bullet.GetComponent<PlayerBullet>();
-            if (bulletScript != null)
+            PlayerBullet playerBullet = bullet.GetComponent<PlayerBullet>();
+            if (playerBullet != null)
             {
-                bulletScript.damage = holdTime*2;
+                playerBullet.damage = holdTime*2;
             }
             isHolding = false;
         }

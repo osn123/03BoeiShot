@@ -168,3 +168,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 1
   effect: {fileID: 8367256598104179562, guid: 1dedafa0f0f84a14d93cad259fbc5cd5, type: 3}
+  normalSprite: {fileID: 4181766554078344057, guid: 7a3b603ccec053d468f9b563ebce6212, type: 3}
+  weakSprite: {fileID: -3442273424303929756, guid: 9c98402f1567c06499ae4728ac391170, type: 3}
