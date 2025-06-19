@@ -306,6 +306,8 @@ MonoBehaviour:
   barImage: {fileID: 552145764}
   atkbarImage: {fileID: 1628749843}
   damageSE: {fileID: 8300000, guid: 10ffec4053b625140985f9ee54f97f63, type: 3}
+  shotClip: {fileID: 8300000, guid: bc409a78e9cbdeb45b3e3faeb04e886c, type: 3}
+  chargeClip: {fileID: 8300000, guid: 10ffec4053b625140985f9ee54f97f63, type: 3}
   minBulletSpeed: 5
   maxBulletSpeed: 20
   maxHoldTime: 3
@@ -359,7 +361,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 0.4
+  m_Volume: 0.551
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -1682,6 +1684,7 @@ GameObject:
   - component: {fileID: 1242391650}
   - component: {fileID: 1242391649}
   - component: {fileID: 1242391648}
+  - component: {fileID: 1242391652}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -1706,7 +1709,9 @@ MonoBehaviour:
   gameStartPanel: {fileID: 1303914069}
   gameOverPanel: {fileID: 94306216}
   gameClearPanel: {fileID: 912021168}
-  clearScore: 500
+  clearSE: {fileID: 8300000, guid: 7def1339f2400fb4e9190e779a339cd8, type: 3}
+  endSE: {fileID: 8300000, guid: f90ecc6e2914e2d43941884d720a6cdb, type: 3}
+  clearScore: 1000
   player: {fileID: 255512516}
   enemy: {fileID: 3557826771491313284, guid: ebce3787c18b9ab45b9703936448f4a1, type: 3}
 --- !u!114 &1242391649
@@ -1740,9 +1745,14 @@ MonoBehaviour:
   speed: 2
   maxHP: 3
   scoreValue: 100
+  zigzagAmplitude: 1
+  zigzagFrequency: 2
+  curveRadius: 2
+  curveSpeed: 1
   gameManager: {fileID: 1242391648}
   barImage: {fileID: 0}
   damageSE: {fileID: 0}
+  deadSE: {fileID: 0}
 --- !u!4 &1242391651
 Transform:
   m_ObjectHideFlags: 0
@@ -1758,6 +1768,103 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!82 &1242391652
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1242391647}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 50a3d640cd641074dbf16eee04ce517f, type: 3}
+  m_Resource: {fileID: 8300000, guid: 50a3d640cd641074dbf16eee04ce517f, type: 3}
+  m_PlayOnAwake: 1
+  m_Volume: 0.639
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &1265024245
 GameObject:
   m_ObjectHideFlags: 0

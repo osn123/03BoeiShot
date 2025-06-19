@@ -290,6 +290,7 @@ MonoBehaviour:
   gameManager: {fileID: 0}
   barImage: {fileID: 4943773310327303166}
   damageSE: {fileID: 8300000, guid: 10ffec4053b625140985f9ee54f97f63, type: 3}
+  deadSE: {fileID: 8300000, guid: f90ecc6e2914e2d43941884d720a6cdb, type: 3}
 --- !u!50 &5403682148713727795
 Rigidbody2D:
   serializedVersion: 5
@@ -389,7 +390,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.555
   m_Pitch: 1
   Loop: 0
   Mute: 0

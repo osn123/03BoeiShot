@@ -12,6 +12,10 @@ public class GameManager : MonoBehaviour {
     public GameObject gameOverPanel;
     public GameObject gameClearPanel;
 
+    public AudioClip clearSE;
+    public AudioClip endSE;
+    private AudioSource audioSource;
+
     private int score = 0;
     public int clearScore = 1000;
 
@@ -36,9 +40,18 @@ public class GameManager : MonoBehaviour {
        // gameStartPanel.SetActive(false);
         gameOverPanel.SetActive(false);
         gameClearPanel.SetActive(false);
+
+        audioSource = GetComponent<AudioSource>();
     }
 
     void Update() {
+
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Application.Quit();
+            Debug.Log("Quit Game."); // エディタで動作確認用
+        }
         //if (Input.GetMouseButtonUp(0)&& startflg)
         //{
         //    gameStartPanel.SetActive(false);
@@ -70,11 +83,13 @@ public class GameManager : MonoBehaviour {
         timeText.text = timeLeft.ToString("F1"); // 小数1桁
     }
     public void GameOver() {
+        audioSource.PlayOneShot(endSE);
         gameOverPanel.SetActive(true);
         Time.timeScale = 0f;
     }
 
     public void GameClear() {
+        audioSource.PlayOneShot(clearSE);
         gameClearPanel.SetActive(true);
         Time.timeScale = 0f;
     }

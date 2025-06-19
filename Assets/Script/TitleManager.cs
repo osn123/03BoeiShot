@@ -32,6 +32,15 @@ public class TitleManager : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
         }
     }
 
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Application.Quit();
+            Debug.Log("Quit Game."); // エディタで動作確認用
+        }
+    }
+
     void OnStartBtnClick() {
         // クリックアニメーション
         startBtnRect.DOPunchScale(Vector3.one * 0.2f,0.2f,10,1).OnComplete(() => {

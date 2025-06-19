@@ -17,6 +17,9 @@ public class Player : MonoBehaviour
     private AudioSource audioSource;
     bool isHolding = false;
 
+    public AudioClip shotClip;      // Inspectorでセット
+    public AudioClip chargeClip;      // Inspectorでセット
+
     private float mouseDownTime;
     public float minBulletSpeed = 5f;
     public float maxBulletSpeed = 20f;
@@ -38,6 +41,10 @@ public class Player : MonoBehaviour
             if (ratio >= 0.66f)
             {
                 atkbarImage.color = Color.red; //
+            }
+            if (!audioSource.isPlaying)
+            {
+                audioSource.PlayOneShot(chargeClip);
             }
 
         }
@@ -77,6 +84,9 @@ public class Player : MonoBehaviour
                 rb.linearVelocity = dir * bulletSpeed;
                 Destroy(bullet, lifetime); // lifetime後に弾を破棄
             }
+
+            audioSource.PlayOneShot(shotClip);
+
             // ダメージ値をセット
             PlayerBullet playerBullet = bullet.GetComponent<PlayerBullet>();
             if (playerBullet != null)
